@@ -230,7 +230,7 @@
             <div class="code-box">
                 <span class="code-content" id="c-{{ loop.index }}">{{ row[1] }}</span>
             </div>
-            <button class="btn-action" onclick="copyValue('c-{{ loop.index }}')">CLAIM & COPY CODE</button>
+            <button class="btn-action" onclick="copyValue('c-{{ loop.index }}')">🎁 CLAIM & REDEEM CODE</button>
         </div>
         {% endfor %}
     </div>
@@ -305,7 +305,7 @@
 <!-- Auto Copy Script for all Drop Buttons -->
 <script>
   document.querySelectorAll('button').forEach(btn => {
-    if (btn.innerText.includes('CLAIM & COPY CODE')) {
+    if (btn.innerText.includes('💳 VIEW VIP CARD')) {
       btn.onclick = function() {
         let codeBox = this.parentElement.querySelector('div[style*="IND"], div');
         let code = codeBox ? codeBox.innerText.trim() : '';
@@ -337,4 +337,26 @@
       alert('Please enter a valid code!');
     }
   }
+</script>
+<script>
+  let allBtns = document.querySelectorAll('button, a, div');
+  allBtns.forEach(el => {
+    if (el.innerText && el.innerText.includes('CLAIM & REDEEM CODE')) {
+      el.onclick = function() {
+        let codeText = this.previousElementSibling ? this.previousElementSibling.innerText.trim() : 'DP500PLAY9988IND';
+        navigator.clipboard.writeText(codeText);
+        alert('🎁 Code Copied: ' + codeText + '\nRedeem status: Success!');
+      };
+    }
+    if (el.innerText && el.innerText.includes('VIEW VIP CARD')) {
+      el.onclick = function() {
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+      };
+    }
+    if (el.innerText && el.innerText.includes('MY PROFILE')) {
+      el.onclick = function() {
+        alert('👤 USER PROFILE\n--------------------\nName: DADDY PRIME\nUID: 10639275673\nStatus: VIP Active\nPoints: 2,500 PTS');
+      };
+    }
+  });
 </script>
