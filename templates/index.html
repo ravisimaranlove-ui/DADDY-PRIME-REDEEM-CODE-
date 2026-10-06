@@ -360,3 +360,28 @@
     }
   });
 </script>
+
+<!-- Auto Copy + YouTube Subscribe Redirect Script -->
+<script>
+  // अपने यूट्यूब चैनल का लिंक यहाँ सेट किया गया है
+  const YT_CHANNEL_URL = "https://www.youtube.com/@daddyprime?sub_confirmation=1";
+
+  document.querySelectorAll('button, a, div').forEach(el => {
+    if (el.innerText && (el.innerText.includes('CLAIM') || el.innerText.includes('COPY CODE') || el.innerText.includes('REDEEM'))) {
+      el.onclick = function() {
+        // कोड ढूंढकर कॉपी करना
+        let parent = this.parentElement;
+        let codeBox = parent.querySelector('div[style*="IND"], div, p');
+        let code = codeBox ? codeBox.innerText.trim() : 'DP500PLAY9988IND';
+        
+        navigator.clipboard.writeText(code);
+
+        // सब्सक्राइब अलर्ट दिखाना
+        alert("✅ कोड सफलतापूर्वक कॉपी हो गया: " + code + "\n\n⚠️ कोड को एक्टिवेट करने के लिए हमारे यूट्यूब चैनल को सब्सक्राइब करें!");
+
+        // सीधे यूट्यूब चैनल पर भेजना
+        window.open(YT_CHANNEL_URL, '_blank');
+      };
+    }
+  });
+</script>
