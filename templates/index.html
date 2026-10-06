@@ -271,3 +271,70 @@
     </div>
   </div>
 </div>
+
+<!-- Action Buttons & Controls Section -->
+<div style="max-width: 380px; margin: 20px auto 40px auto; padding: 0 10px; font-family: sans-serif;">
+  
+  <!-- Profile & Security Buttons Grid -->
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
+    <button onclick="alert('User: DADDY PRIME\nStatus: Verified VIP\nUID: 10639275673')" style="background: #1a1a24; border: 1px solid #333; color: #fff; padding: 12px; border-radius: 12px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
+      👤 My Profile
+    </button>
+    <button onclick="alert('VIP Pass: DADDY-ELITE-1063\nCard Status: Active\nType: Virtual Pass')" style="background: #1a1a24; border: 1px solid #ffd700; color: #ffd700; padding: 12px; border-radius: 12px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
+      💳 Card Info
+    </button>
+  </div>
+
+  <!-- Manual Code Redeem Form -->
+  <div style="background: #141419; border: 1px solid #2a2a35; padding: 16px; border-radius: 16px; margin-bottom: 15px;">
+    <div style="color: #fff; font-size: 0.9rem; font-weight: bold; margin-bottom: 10px; text-align: left;">🎁 ENTER REDEEM CODE</div>
+    <div style="display: flex; gap: 8px;">
+      <input type="text" id="manualCode" placeholder="PASTE CODE HERE" style="flex: 1; padding: 12px; border-radius: 10px; border: 1px solid #333; background: #0b0b0e; color: #ffd700; font-weight: bold; text-transform: uppercase;">
+      <button onclick="redeemPoints()" style="padding: 12px 18px; border-radius: 10px; border: none; background: #00ff88; color: #000; font-weight: bold; cursor: pointer;">
+        CLAIM
+      </button>
+    </div>
+  </div>
+
+  <!-- Security Password / PIN Button -->
+  <button onclick="prompt('Enter VIP Security PIN to unlock full balance:'); alert('PIN Verified!');" style="width: 100%; background: #221b2b; border: 1px solid #a855f7; color: #d8b4fe; padding: 12px; border-radius: 12px; font-weight: bold; cursor: pointer;">
+    🔐 Card Security PIN Settings
+  </button>
+</div>
+
+<!-- Auto Copy Script for all Drop Buttons -->
+<script>
+  document.querySelectorAll('button').forEach(btn => {
+    if (btn.innerText.includes('CLAIM & COPY CODE')) {
+      btn.onclick = function() {
+        let codeBox = this.parentElement.querySelector('div[style*="IND"], div');
+        let code = codeBox ? codeBox.innerText.trim() : '';
+        if (!code) {
+          code = this.previousElementSibling ? this.previousElementSibling.innerText.trim() : '';
+        }
+        if (code) {
+          navigator.clipboard.writeText(code);
+          let oldText = this.innerText;
+          this.innerText = 'COPIED TO CLIPBOARD! ✅';
+          this.style.background = '#00ff88';
+          this.style.color = '#000';
+          setTimeout(() => {
+            this.innerText = oldText;
+            this.style.background = '';
+            this.style.color = '';
+          }, 2000);
+        }
+      };
+    }
+  });
+
+  function redeemPoints() {
+    let input = document.getElementById('manualCode');
+    if (input.value.trim() !== '') {
+      alert('Code ' + input.value.trim().toUpperCase() + ' Redeemed! 💎 500 PTS added to your card.');
+      input.value = '';
+    } else {
+      alert('Please enter a valid code!');
+    }
+  }
+</script>
